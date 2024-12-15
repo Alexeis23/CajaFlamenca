@@ -1,0 +1,35 @@
+function doGet() {
+  return HtmlService.createHtmlOutputFromFile('index'); // Este carga el archivo HTML
+}
+
+function calcular(billetes50, billetes20, billetes10, billetes5, monedas2, monedas1, monedas050, monedas020, monedas010, monedas005, monedas002, monedas001, deudas, totalEsperado) {
+  // Calcular el total de efectivo
+  var totalBilletes = (billetes50 * 50) + (billetes20 * 20) + (billetes10 * 10) + (billetes5 * 5);
+  var totalMonedas = (monedas2 * 2) + (monedas1 * 1) + (monedas050 * 0.5) + (monedas020 * 0.2) + (monedas010 * 0.1) + (monedas005 * 0.05) + (monedas002 * 0.02) + (monedas001 * 0.01);
+  var totalEfectivo = totalBilletes + totalMonedas;
+
+  // Calcular el descuadre
+  var descuadre = totalEfectivo - totalEsperado - deudas;
+
+  // Retornar el total efectivo y el descuadre
+  return {
+    totalEfectivo: totalEfectivo,
+    descuadre: descuadre
+  };
+}
+
+
+
+
+function limpiarContenido() {
+  var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("hoja1");
+  var rango1 = hoja.getRange("f2:f5");
+  var rango2 = hoja.getRange("f8:F15");
+  var rango3 = hoja.getRange("F23");
+  var rango4 = hoja.getRange("G2:G24");
+
+  rango1.clearContent();
+  rango2.clearContent();
+  rango3.clearContent();
+  rango4.clearContent();
+}
